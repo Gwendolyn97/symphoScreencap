@@ -28,9 +28,13 @@ def bot():
 
         twitter().update_with_media(filename = f"{directory}\\{image}", status = f"{image}")
         print(f"{image} has been sent!")
-        
+
         os.remove(f"{directory}\\{image}")
-        print(f"Image has been deleted.\nThere are {len(os.listdir(directory))} images left in {directory}")
+        value = len(os.listdir(directory))
+        print(f"Image has been deleted.\nThere are {value:,} images left in {directory}")
+        
+        twitter().update_profile(description = f"A random frame from Symphogear every ten minutes! There are {value:,} frames remaining! Created by @gwendoughlyn_")
+        print(f"Status has been updated to: 'A random frame from Symphogear every ten minutes! There are {value:,} frames remaining! Created by @gwendoughlyn_'")
         
         print(f"Task completed.\n-----")    
     except tweepy.TweepError as e: 
